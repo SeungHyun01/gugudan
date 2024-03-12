@@ -1,15 +1,30 @@
-// 구구단을 출력하는 함수
-function printMultiplicationTable() {
-    // 2부터 9까지의 단을 반복
-    for (let i = 2; i <= 9; i++) {
-        console.log(`--- ${i}단 ---`);
-        // 각 단에서 1부터 9까지의 곱셈 결과 출력
-        for (let j = 1; j <= 9; j++) {
-            console.log(`${i} x ${j} = ${i * j}`);
-        }
-        console.log(); // 각 단 사이에 공백 추가
+const readline = require('readline');
+
+// Readline 인터페이스 생성
+const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+});
+
+// 구구단 출력 함수
+function printMultiplicationTable(num) {
+    console.log(`--- ${num}단 ---`);
+    // 입력된 숫자에 해당하는 단의 구구단 출력
+    for (let i = 1; i <= 9; i++) {
+        console.log(`${num} x ${i} = ${num * i}`);
     }
 }
 
-// 구구단 출력 함수 호출
-printMultiplicationTable();
+// 사용자에게 입력 요청
+rl.question('Enter a number (1-9) for the multiplication table: ', (answer) => {
+    const num = parseInt(answer);
+    if (num >= 1 && num <= 9) {
+        printMultiplicationTable(num);
+    } else {
+        console.log('Please enter a number between 1 and 9.');
+    }
+    
+    // 인터페이스 종료
+    rl.close();
+});
+
