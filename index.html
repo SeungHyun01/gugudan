@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table</title>
+</head>
+<body>
+    <h2>Select a multiplication table:</h2>
+    <select id="multiplication-selector">
+        <option value="0">Select a table</option>
+        <!-- 1부터 9까지의 옵션을 생성합니다. -->
+        <script>
+            for (let i = 1; i <= 9; i++) {
+                document.write(`<option value="${i}">${i}단</option>`);
+            }
+        </script>
+    </select>
+
+    <!-- 선택된 단의 구구단을 표시할 테이블 -->
+    <table id="multiplication-table" style="display: none;">
+        <!-- JavaScript로 동적으로 생성됩니다. -->
+    </table>
+
+    <script>
+        // 선택된 단에 해당하는 구구단을 보여주는 함수
+        function showMultiplicationTable(selectedTable) {
+            const table = document.getElementById('multiplication-table');
+            table.style.display = 'table'; // 테이블 보이기
+
+            // 테이블 초기화
+            table.innerHTML = '';
+
+            // 선택된 단의 곱셈 결과를 추가
+            for (let i = 1; i <= 9; i++) {
+                const row = table.insertRow();
+                const cell1 = row.insertCell();
+                const cell2 = row.insertCell();
+                cell1.textContent = `${selectedTable} x ${i}`;
+                cell2.textContent = `${selectedTable * i}`;
+            }
+        }
+
+        // 선택한 단이 변경되었을 때 실행될 함수
+        document.getElementById('multiplication-selector').addEventListener('change', function() {
+            const selectedTable = parseInt(this.value); // 선택된 단을 가져옴
+            const table = document.getElementById('multiplication-table');
+
+            if (selectedTable !== 0) {
+                showMultiplicationTable(selectedTable); // 선택된 단을 표시
+            } else {
+                table.style.display = 'none'; // 테이블 숨기기
+            }
+        });
+    </script>
+</body>
+</html>
